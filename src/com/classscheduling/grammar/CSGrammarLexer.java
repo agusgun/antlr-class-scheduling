@@ -1,16 +1,13 @@
-// Generated from /home/agus/Project/ClassScheduling/src/Test.g4 by ANTLR 4.7
-package com.classscheduling.parser;
+// Generated from /home/agus/Project/ClassScheduling/src/CSGrammar.g4 by ANTLR 4.7
+package com.classscheduling.grammar;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
-import org.antlr.v4.runtime.Token;
-import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
-import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class TestLexer extends Lexer {
+public class CSGrammarLexer extends Lexer {
 	static { RuntimeMetaData.checkVersion("4.7", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -31,7 +28,7 @@ public class TestLexer extends Lexer {
 	};
 
 	private static final String[] _LITERAL_NAMES = {
-		null, "'Hello '", "'!'"
+		null, "'Hello '", "'.'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, null, null, "ANY"
@@ -70,13 +67,13 @@ public class TestLexer extends Lexer {
 	}
 
 
-	public TestLexer(CharStream input) {
+	public CSGrammarLexer(CharStream input) {
 		super(input);
 		_interp = new LexerATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
 	@Override
-	public String getGrammarFileName() { return "Test.g4"; }
+	public String getGrammarFileName() { return "main/antlr4/CSGrammar.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -98,8 +95,8 @@ public class TestLexer extends Lexer {
 		"\4\3\t\3\4\4\t\4\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\3\3\3\3\4\3\4\2\2\5\3\3"+
 		"\5\4\7\5\3\2\2\2\23\2\3\3\2\2\2\2\5\3\2\2\2\2\7\3\2\2\2\3\t\3\2\2\2\5"+
 		"\20\3\2\2\2\7\22\3\2\2\2\t\n\7J\2\2\n\13\7g\2\2\13\f\7n\2\2\f\r\7n\2\2"+
-		"\r\16\7q\2\2\16\17\7\"\2\2\17\4\3\2\2\2\20\21\7#\2\2\21\6\3\2\2\2\22\23"+
-		"\13\2\2\2\23\b\3\2\2\2\3\2\2";
+		"\r\16\7q\2\2\16\17\7\"\2\2\17\4\3\2\2\2\20\21\7\60\2\2\21\6\3\2\2\2\22"+
+		"\23\13\2\2\2\23\b\3\2\2\2\3\2\2";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

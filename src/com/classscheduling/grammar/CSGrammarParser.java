@@ -1,16 +1,13 @@
-// Generated from /home/agus/Project/ClassScheduling/src/Test.g4 by ANTLR 4.7
-package com.classscheduling.parser;
+// Generated from /home/agus/Project/ClassScheduling/src/CSGrammar.g4 by ANTLR 4.7
+package com.classscheduling.grammar;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.misc.*;
 import org.antlr.v4.runtime.tree.*;
 import java.util.List;
-import java.util.Iterator;
-import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class TestParser extends Parser {
+public class CSGrammarParser extends Parser {
 	static { RuntimeMetaData.checkVersion("4.7", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -25,7 +22,7 @@ public class TestParser extends Parser {
 	};
 
 	private static final String[] _LITERAL_NAMES = {
-		null, "'Hello '", "'!'"
+		null, "'Hello '", "'.'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, null, null, "ANY"
@@ -64,7 +61,7 @@ public class TestParser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "Test.g4"; }
+	public String getGrammarFileName() { return "main/antlr4/CSGrammar.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -75,7 +72,7 @@ public class TestParser extends Parser {
 	@Override
 	public ATN getATN() { return _ATN; }
 
-	public TestParser(TokenStream input) {
+	public CSGrammarParser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
@@ -89,11 +86,11 @@ public class TestParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_main; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TestListener ) ((TestListener)listener).enterMain(this);
+			if ( listener instanceof CSGrammarListener ) ((CSGrammarListener)listener).enterMain(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TestListener ) ((TestListener)listener).exitMain(this);
+			if ( listener instanceof CSGrammarListener ) ((CSGrammarListener)listener).exitMain(this);
 		}
 	}
 
@@ -123,9 +120,9 @@ public class TestParser extends Parser {
 	}
 
 	public static class NameContext extends ParserRuleContext {
-		public List<TerminalNode> ANY() { return getTokens(TestParser.ANY); }
+		public List<TerminalNode> ANY() { return getTokens(CSGrammarParser.ANY); }
 		public TerminalNode ANY(int i) {
-			return getToken(TestParser.ANY, i);
+			return getToken(CSGrammarParser.ANY, i);
 		}
 		public NameContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -133,11 +130,11 @@ public class TestParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_name; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TestListener ) ((TestListener)listener).enterName(this);
+			if ( listener instanceof CSGrammarListener ) ((CSGrammarListener)listener).enterName(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TestListener ) ((TestListener)listener).exitName(this);
+			if ( listener instanceof CSGrammarListener ) ((CSGrammarListener)listener).exitName(this);
 		}
 	}
 
