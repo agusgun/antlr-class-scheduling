@@ -41,7 +41,7 @@ WHITESPACE: (' ' | '\t')+ ;
 
 NEWLINE: '\r'? '\n' | '\r';
 HYPHEN: WHITESPACE '-' WHITESPACE ;
-COMMA: WHITESPACE ',' WHITESPACE ;
+COMMA: ',' WHITESPACE ;
 EQUAL: WHITESPACE '=' WHITESPACE ;
 WITH: WHITESPACE 'WITH' WHITESPACE ;
 COLON: ':';
@@ -73,15 +73,15 @@ capacity_config: 'CAPACITY' '=' amount;
 facilities_config: 'FACILITIES' '=' facilities '-' amount;
 class_config: (capacity_config | facilities_config ) ;
 classroom: CLASSROOM ;
-define_class_config: CONFIGURE_COMMAND classroom WITH class_config ;
+define_class_config: CONFIGURE_COMMAND classroom WITH class_config (COMMA class_config)*;
 
 
 /* Define class requirement */
 group: WORD ;
 group_config: 'GROUP=' group ;
-class_requirement: (capacity_config | facilities_config | group_config) ;
+lecture_requirement: (capacity_config | facilities_config | group_config) ;
 lecture: LECTURE ;
-define_class_requirement: REQUIREMENT_COMMAND lecture WITH class_requirement ;
+define_class_requirement: REQUIREMENT_COMMAND lecture WITH lecture_requirement (COMMA lecture_requirement)*;
 
 
 /* Define lecturer */
@@ -92,7 +92,7 @@ availability_day_time: 'AVAILABILITY_DAYTIME=' day '-' time;
 lecturer_details: (availability_day | availability_day_time | group_config) ;
 
 lecturer: THREELETTER;
-define_lecturer: LECTURER_COMMAND lecturer '-' lecturer_details ;
+define_lecturer: LECTURER_COMMAND lecturer '-' lecturer_details (COMMA lecturer_details)*;
 
 
 /* Preference & Constraint */
