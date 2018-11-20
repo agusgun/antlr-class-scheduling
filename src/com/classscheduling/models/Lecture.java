@@ -16,6 +16,13 @@ public class Lecture {
         this.group = "";
     }
 
+    public Lecture(String lectureName) {
+        this.lectureName = lectureName;
+        this.capacity = defaultCapacity;
+        this.facilityList = new ArrayList<>();
+        this.group = "";
+    }
+
     public String getLectureName() {
         return lectureName;
     }

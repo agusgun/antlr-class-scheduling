@@ -14,6 +14,12 @@ public class Classroom {
         this.facilityList = new ArrayList<>();
     }
 
+    public Classroom(String classroomName) {
+        this.classroomName = classroomName;
+        this.capacity = defaultCapacity;
+        this.facilityList = new ArrayList<>();
+    }
+
     public String getClassroomName() {
         return classroomName;
     }

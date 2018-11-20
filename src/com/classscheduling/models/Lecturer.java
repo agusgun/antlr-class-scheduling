@@ -13,6 +13,12 @@ public class Lecturer {
         this.lecturerAvailability = new boolean[rows][columns]; // all false by default
     }
 
+    public Lecturer(String lecturerName, boolean[][] lecturerAvailability) {
+        this.lecturerName = lecturerName;
+        this.group = "";
+        this.lecturerAvailability = lecturerAvailability;
+    }
+
     public String getLecturerName() {
         return lecturerName;
     }
