@@ -9,7 +9,7 @@ public class Preference {
         this.cooccurLecturesList = new ArrayList<>();
     }
 
-    public void setCooccurLectures(ArrayList<String> cooccurLectures) {
+    public void addCooccurLectures(ArrayList<String> cooccurLectures) {
         this.cooccurLecturesList.add(cooccurLectures);
     }
 

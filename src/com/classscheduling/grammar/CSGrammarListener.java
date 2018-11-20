@@ -8,45 +8,55 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface CSGrammarListener extends ParseTreeListener {
 	/**
-	 * Enter a parse tree produced by {@link CSGrammarParser#amount}.
+	 * Enter a parse tree produced by {@link CSGrammarParser#amount_capacity_classroom}.
 	 * @param ctx the parse tree
 	 */
-	void enterAmount(CSGrammarParser.AmountContext ctx);
+	void enterAmount_capacity_classroom(CSGrammarParser.Amount_capacity_classroomContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CSGrammarParser#amount}.
+	 * Exit a parse tree produced by {@link CSGrammarParser#amount_capacity_classroom}.
 	 * @param ctx the parse tree
 	 */
-	void exitAmount(CSGrammarParser.AmountContext ctx);
+	void exitAmount_capacity_classroom(CSGrammarParser.Amount_capacity_classroomContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CSGrammarParser#facilities}.
+	 * Enter a parse tree produced by {@link CSGrammarParser#amount_facility_classroom}.
 	 * @param ctx the parse tree
 	 */
-	void enterFacilities(CSGrammarParser.FacilitiesContext ctx);
+	void enterAmount_facility_classroom(CSGrammarParser.Amount_facility_classroomContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CSGrammarParser#facilities}.
+	 * Exit a parse tree produced by {@link CSGrammarParser#amount_facility_classroom}.
 	 * @param ctx the parse tree
 	 */
-	void exitFacilities(CSGrammarParser.FacilitiesContext ctx);
+	void exitAmount_facility_classroom(CSGrammarParser.Amount_facility_classroomContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CSGrammarParser#capacity_config}.
+	 * Enter a parse tree produced by {@link CSGrammarParser#facility_name_classroom}.
 	 * @param ctx the parse tree
 	 */
-	void enterCapacity_config(CSGrammarParser.Capacity_configContext ctx);
+	void enterFacility_name_classroom(CSGrammarParser.Facility_name_classroomContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CSGrammarParser#capacity_config}.
+	 * Exit a parse tree produced by {@link CSGrammarParser#facility_name_classroom}.
 	 * @param ctx the parse tree
 	 */
-	void exitCapacity_config(CSGrammarParser.Capacity_configContext ctx);
+	void exitFacility_name_classroom(CSGrammarParser.Facility_name_classroomContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CSGrammarParser#facilities_config}.
+	 * Enter a parse tree produced by {@link CSGrammarParser#capacity_config_classroom}.
 	 * @param ctx the parse tree
 	 */
-	void enterFacilities_config(CSGrammarParser.Facilities_configContext ctx);
+	void enterCapacity_config_classroom(CSGrammarParser.Capacity_config_classroomContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CSGrammarParser#facilities_config}.
+	 * Exit a parse tree produced by {@link CSGrammarParser#capacity_config_classroom}.
 	 * @param ctx the parse tree
 	 */
-	void exitFacilities_config(CSGrammarParser.Facilities_configContext ctx);
+	void exitCapacity_config_classroom(CSGrammarParser.Capacity_config_classroomContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CSGrammarParser#facilities_config_classroom}.
+	 * @param ctx the parse tree
+	 */
+	void enterFacilities_config_classroom(CSGrammarParser.Facilities_config_classroomContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CSGrammarParser#facilities_config_classroom}.
+	 * @param ctx the parse tree
+	 */
+	void exitFacilities_config_classroom(CSGrammarParser.Facilities_config_classroomContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CSGrammarParser#class_config}.
 	 * @param ctx the parse tree
@@ -58,15 +68,15 @@ public interface CSGrammarListener extends ParseTreeListener {
 	 */
 	void exitClass_config(CSGrammarParser.Class_configContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CSGrammarParser#classroom}.
+	 * Enter a parse tree produced by {@link CSGrammarParser#classroom_name}.
 	 * @param ctx the parse tree
 	 */
-	void enterClassroom(CSGrammarParser.ClassroomContext ctx);
+	void enterClassroom_name(CSGrammarParser.Classroom_nameContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CSGrammarParser#classroom}.
+	 * Exit a parse tree produced by {@link CSGrammarParser#classroom_name}.
 	 * @param ctx the parse tree
 	 */
-	void exitClassroom(CSGrammarParser.ClassroomContext ctx);
+	void exitClassroom_name(CSGrammarParser.Classroom_nameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CSGrammarParser#define_class_config}.
 	 * @param ctx the parse tree
@@ -78,25 +88,75 @@ public interface CSGrammarListener extends ParseTreeListener {
 	 */
 	void exitDefine_class_config(CSGrammarParser.Define_class_configContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CSGrammarParser#group}.
+	 * Enter a parse tree produced by {@link CSGrammarParser#amount_capacity_lecture}.
 	 * @param ctx the parse tree
 	 */
-	void enterGroup(CSGrammarParser.GroupContext ctx);
+	void enterAmount_capacity_lecture(CSGrammarParser.Amount_capacity_lectureContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CSGrammarParser#group}.
+	 * Exit a parse tree produced by {@link CSGrammarParser#amount_capacity_lecture}.
 	 * @param ctx the parse tree
 	 */
-	void exitGroup(CSGrammarParser.GroupContext ctx);
+	void exitAmount_capacity_lecture(CSGrammarParser.Amount_capacity_lectureContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CSGrammarParser#group_config}.
+	 * Enter a parse tree produced by {@link CSGrammarParser#amount_facility_lecture}.
 	 * @param ctx the parse tree
 	 */
-	void enterGroup_config(CSGrammarParser.Group_configContext ctx);
+	void enterAmount_facility_lecture(CSGrammarParser.Amount_facility_lectureContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CSGrammarParser#group_config}.
+	 * Exit a parse tree produced by {@link CSGrammarParser#amount_facility_lecture}.
 	 * @param ctx the parse tree
 	 */
-	void exitGroup_config(CSGrammarParser.Group_configContext ctx);
+	void exitAmount_facility_lecture(CSGrammarParser.Amount_facility_lectureContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CSGrammarParser#facility_name_lecture}.
+	 * @param ctx the parse tree
+	 */
+	void enterFacility_name_lecture(CSGrammarParser.Facility_name_lectureContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CSGrammarParser#facility_name_lecture}.
+	 * @param ctx the parse tree
+	 */
+	void exitFacility_name_lecture(CSGrammarParser.Facility_name_lectureContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CSGrammarParser#capacity_config_lecture}.
+	 * @param ctx the parse tree
+	 */
+	void enterCapacity_config_lecture(CSGrammarParser.Capacity_config_lectureContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CSGrammarParser#capacity_config_lecture}.
+	 * @param ctx the parse tree
+	 */
+	void exitCapacity_config_lecture(CSGrammarParser.Capacity_config_lectureContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CSGrammarParser#facility_config_lecture}.
+	 * @param ctx the parse tree
+	 */
+	void enterFacility_config_lecture(CSGrammarParser.Facility_config_lectureContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CSGrammarParser#facility_config_lecture}.
+	 * @param ctx the parse tree
+	 */
+	void exitFacility_config_lecture(CSGrammarParser.Facility_config_lectureContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CSGrammarParser#group_lecture}.
+	 * @param ctx the parse tree
+	 */
+	void enterGroup_lecture(CSGrammarParser.Group_lectureContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CSGrammarParser#group_lecture}.
+	 * @param ctx the parse tree
+	 */
+	void exitGroup_lecture(CSGrammarParser.Group_lectureContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CSGrammarParser#group_config_lecture}.
+	 * @param ctx the parse tree
+	 */
+	void enterGroup_config_lecture(CSGrammarParser.Group_config_lectureContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CSGrammarParser#group_config_lecture}.
+	 * @param ctx the parse tree
+	 */
+	void exitGroup_config_lecture(CSGrammarParser.Group_config_lectureContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CSGrammarParser#lecture_requirement}.
 	 * @param ctx the parse tree
@@ -128,6 +188,26 @@ public interface CSGrammarListener extends ParseTreeListener {
 	 */
 	void exitDefine_lecture_requirement(CSGrammarParser.Define_lecture_requirementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CSGrammarParser#group_lecturer}.
+	 * @param ctx the parse tree
+	 */
+	void enterGroup_lecturer(CSGrammarParser.Group_lecturerContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CSGrammarParser#group_lecturer}.
+	 * @param ctx the parse tree
+	 */
+	void exitGroup_lecturer(CSGrammarParser.Group_lecturerContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CSGrammarParser#group_config_lecturer}.
+	 * @param ctx the parse tree
+	 */
+	void enterGroup_config_lecturer(CSGrammarParser.Group_config_lecturerContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CSGrammarParser#group_config_lecturer}.
+	 * @param ctx the parse tree
+	 */
+	void exitGroup_config_lecturer(CSGrammarParser.Group_config_lecturerContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CSGrammarParser#time}.
 	 * @param ctx the parse tree
 	 */
@@ -138,15 +218,25 @@ public interface CSGrammarListener extends ParseTreeListener {
 	 */
 	void exitTime(CSGrammarParser.TimeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CSGrammarParser#day}.
+	 * Enter a parse tree produced by {@link CSGrammarParser#day_day}.
 	 * @param ctx the parse tree
 	 */
-	void enterDay(CSGrammarParser.DayContext ctx);
+	void enterDay_day(CSGrammarParser.Day_dayContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CSGrammarParser#day}.
+	 * Exit a parse tree produced by {@link CSGrammarParser#day_day}.
 	 * @param ctx the parse tree
 	 */
-	void exitDay(CSGrammarParser.DayContext ctx);
+	void exitDay_day(CSGrammarParser.Day_dayContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CSGrammarParser#day_day_time}.
+	 * @param ctx the parse tree
+	 */
+	void enterDay_day_time(CSGrammarParser.Day_day_timeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CSGrammarParser#day_day_time}.
+	 * @param ctx the parse tree
+	 */
+	void exitDay_day_time(CSGrammarParser.Day_day_timeContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CSGrammarParser#availability_day}.
 	 * @param ctx the parse tree
@@ -197,6 +287,26 @@ public interface CSGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDefine_lecturer(CSGrammarParser.Define_lecturerContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CSGrammarParser#lecture_preference}.
+	 * @param ctx the parse tree
+	 */
+	void enterLecture_preference(CSGrammarParser.Lecture_preferenceContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CSGrammarParser#lecture_preference}.
+	 * @param ctx the parse tree
+	 */
+	void exitLecture_preference(CSGrammarParser.Lecture_preferenceContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CSGrammarParser#lecture_constraint}.
+	 * @param ctx the parse tree
+	 */
+	void enterLecture_constraint(CSGrammarParser.Lecture_constraintContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CSGrammarParser#lecture_constraint}.
+	 * @param ctx the parse tree
+	 */
+	void exitLecture_constraint(CSGrammarParser.Lecture_constraintContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CSGrammarParser#prefer_cooccurrence}.
 	 * @param ctx the parse tree

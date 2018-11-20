@@ -8,8 +8,8 @@ public class Classroom {
     private int capacity;
     private ArrayList<Facility> facilityList;
 
-    public Classroom(String classroomName) {
-        this.classroomName = classroomName;
+    public Classroom() {
+        this.classroomName = "";
         this.capacity = defaultCapacity;
         this.facilityList = new ArrayList<>();
     }

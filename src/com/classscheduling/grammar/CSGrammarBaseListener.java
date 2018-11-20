@@ -16,49 +16,61 @@ public class CSGrammarBaseListener implements CSGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAmount(CSGrammarParser.AmountContext ctx) { }
+	@Override public void enterAmount_capacity_classroom(CSGrammarParser.Amount_capacity_classroomContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAmount(CSGrammarParser.AmountContext ctx) { }
+	@Override public void exitAmount_capacity_classroom(CSGrammarParser.Amount_capacity_classroomContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFacilities(CSGrammarParser.FacilitiesContext ctx) { }
+	@Override public void enterAmount_facility_classroom(CSGrammarParser.Amount_facility_classroomContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFacilities(CSGrammarParser.FacilitiesContext ctx) { }
+	@Override public void exitAmount_facility_classroom(CSGrammarParser.Amount_facility_classroomContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCapacity_config(CSGrammarParser.Capacity_configContext ctx) { }
+	@Override public void enterFacility_name_classroom(CSGrammarParser.Facility_name_classroomContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCapacity_config(CSGrammarParser.Capacity_configContext ctx) { }
+	@Override public void exitFacility_name_classroom(CSGrammarParser.Facility_name_classroomContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFacilities_config(CSGrammarParser.Facilities_configContext ctx) { }
+	@Override public void enterCapacity_config_classroom(CSGrammarParser.Capacity_config_classroomContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFacilities_config(CSGrammarParser.Facilities_configContext ctx) { }
+	@Override public void exitCapacity_config_classroom(CSGrammarParser.Capacity_config_classroomContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFacilities_config_classroom(CSGrammarParser.Facilities_config_classroomContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFacilities_config_classroom(CSGrammarParser.Facilities_config_classroomContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -76,13 +88,13 @@ public class CSGrammarBaseListener implements CSGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterClassroom(CSGrammarParser.ClassroomContext ctx) { }
+	@Override public void enterClassroom_name(CSGrammarParser.Classroom_nameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitClassroom(CSGrammarParser.ClassroomContext ctx) { }
+	@Override public void exitClassroom_name(CSGrammarParser.Classroom_nameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -100,25 +112,85 @@ public class CSGrammarBaseListener implements CSGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterGroup(CSGrammarParser.GroupContext ctx) { }
+	@Override public void enterAmount_capacity_lecture(CSGrammarParser.Amount_capacity_lectureContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitGroup(CSGrammarParser.GroupContext ctx) { }
+	@Override public void exitAmount_capacity_lecture(CSGrammarParser.Amount_capacity_lectureContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterGroup_config(CSGrammarParser.Group_configContext ctx) { }
+	@Override public void enterAmount_facility_lecture(CSGrammarParser.Amount_facility_lectureContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitGroup_config(CSGrammarParser.Group_configContext ctx) { }
+	@Override public void exitAmount_facility_lecture(CSGrammarParser.Amount_facility_lectureContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFacility_name_lecture(CSGrammarParser.Facility_name_lectureContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFacility_name_lecture(CSGrammarParser.Facility_name_lectureContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCapacity_config_lecture(CSGrammarParser.Capacity_config_lectureContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCapacity_config_lecture(CSGrammarParser.Capacity_config_lectureContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFacility_config_lecture(CSGrammarParser.Facility_config_lectureContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFacility_config_lecture(CSGrammarParser.Facility_config_lectureContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterGroup_lecture(CSGrammarParser.Group_lectureContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitGroup_lecture(CSGrammarParser.Group_lectureContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterGroup_config_lecture(CSGrammarParser.Group_config_lectureContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitGroup_config_lecture(CSGrammarParser.Group_config_lectureContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -160,6 +232,30 @@ public class CSGrammarBaseListener implements CSGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterGroup_lecturer(CSGrammarParser.Group_lecturerContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitGroup_lecturer(CSGrammarParser.Group_lecturerContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterGroup_config_lecturer(CSGrammarParser.Group_config_lecturerContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitGroup_config_lecturer(CSGrammarParser.Group_config_lecturerContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterTime(CSGrammarParser.TimeContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -172,13 +268,25 @@ public class CSGrammarBaseListener implements CSGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDay(CSGrammarParser.DayContext ctx) { }
+	@Override public void enterDay_day(CSGrammarParser.Day_dayContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDay(CSGrammarParser.DayContext ctx) { }
+	@Override public void exitDay_day(CSGrammarParser.Day_dayContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDay_day_time(CSGrammarParser.Day_day_timeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDay_day_time(CSGrammarParser.Day_day_timeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -239,6 +347,30 @@ public class CSGrammarBaseListener implements CSGrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDefine_lecturer(CSGrammarParser.Define_lecturerContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLecture_preference(CSGrammarParser.Lecture_preferenceContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLecture_preference(CSGrammarParser.Lecture_preferenceContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLecture_constraint(CSGrammarParser.Lecture_constraintContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLecture_constraint(CSGrammarParser.Lecture_constraintContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

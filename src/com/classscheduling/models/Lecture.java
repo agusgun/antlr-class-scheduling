@@ -9,8 +9,8 @@ public class Lecture {
     private ArrayList<Facility> facilityList;
     private String group;
 
-    public Lecture(String lectureName) {
-        this.lectureName = lectureName;
+    public Lecture() {
+        this.lectureName = "";
         this.capacity = defaultCapacity;
         this.facilityList = new ArrayList<>();
         this.group = "";

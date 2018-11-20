@@ -4,9 +4,9 @@ public class Facility {
     private String facilityName;
     private int amount;
 
-    public Facility(String facilityName, int amount) {
-        this.facilityName = facilityName;
-        this.amount = amount;
+    public Facility() {
+        this.facilityName = "";
+        this.amount = 0;
     }
 
     public String getFacilityName() {

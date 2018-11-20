@@ -9,7 +9,7 @@ public class Constraint {
         this.separatedLecturesList = new ArrayList<>();
     }
 
-    public void setSeparatedLectures(ArrayList<String> separatedLectures) {
+    public void addSeparatedLectures(ArrayList<String> separatedLectures) {
         this.separatedLecturesList.add(separatedLectures);
     }
 
