@@ -99,7 +99,7 @@ define_lecturer: LECTURER_COMMAND lecturer '-' lecturer_details (COMMA lecturer_
 prefer_cooccurrence: PREFER_COMMAND lecture (COMMA lecture)+ ;
 constraint_separation: CONSTRAINT_COMMAND lecture (COMMA lecture)+ ;
 
-/* Schedule */
+/* ScheduleController */
 schedule: 'SCHEDULE' ;
 
 /* Entry */
