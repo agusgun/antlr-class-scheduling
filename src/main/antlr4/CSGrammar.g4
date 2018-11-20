@@ -51,7 +51,7 @@ TIME: TWODIGITOPT COLON TWODIGIT ;
 NAME: (WORD | WORD WHITESPACE*)+ ;
 LECTURER: NAME ;
 LECTURERS: LECTURER (SLASH LECTURER)? ;
-LECTURE: TWOLETTER TWODIGIT TWODIGIT WHITESPACE LETTER DIGIT;
+LECTURE: (TWOLETTER TWODIGIT TWODIGIT WHITESPACE LETTER DIGIT | TWOLETTER DIGIT 'xxx' WHITESPACE LETTER DIGIT) ;
 
 /* Related to Parse */
 CONFIGURE_COMMAND: 'CONFIGURE:' WHITESPACE ;
@@ -81,7 +81,7 @@ group: WORD ;
 group_config: 'GROUP=' group ;
 lecture_requirement: (capacity_config | facilities_config | group_config) ;
 lecture: LECTURE ;
-define_class_requirement: REQUIREMENT_COMMAND lecture WITH lecture_requirement (COMMA lecture_requirement)*;
+define_lecture_requirement: REQUIREMENT_COMMAND lecture WITH lecture_requirement (COMMA lecture_requirement)*;
 
 
 /* Define lecturer */
@@ -103,7 +103,7 @@ constraint_separation: CONSTRAINT_COMMAND lecture (COMMA lecture)+ ;
 schedule: 'SCHEDULE' ;
 
 /* Entry */
-entry: (schedule | prefer_cooccurrence | constraint_separation | define_lecturer | define_class_requirement | define_class_config) NEWLINE ;
+entry: (schedule | prefer_cooccurrence | constraint_separation | define_lecturer | define_lecture_requirement | define_class_config) NEWLINE ;
 
 /* Main */
 main: entry+ ;

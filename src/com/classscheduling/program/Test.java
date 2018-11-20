@@ -7,11 +7,10 @@ import org.antlr.v4.runtime.CommonTokenStream;
 
 public class Test {
     public static void main(String []args) {
-        System.out.println("Hello World"); // prints Hello World
-        CSGrammarLexer lexer = new CSGrammarLexer(CharStreams.fromString("Hello John ."));
+        CSGrammarLexer lexer = new CSGrammarLexer(CharStreams.fromString("SCHEDULE\n"));
         CSGrammarParser parser = new CSGrammarParser(new CommonTokenStream(lexer));
 
-        String name = parser.main().name().getText();
+        String name = parser.entry().schedule().getText();
         System.out.println(name);
     }
 }
