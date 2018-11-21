@@ -2,7 +2,7 @@ package com.classscheduling.models;
 
 import java.util.ArrayList;
 
-public class Classroom {
+public class Classroom implements Comparable {
     private final int defaultCapacity = 50;
     private String classroomName;
     private int capacity;
@@ -50,5 +50,11 @@ public class Classroom {
 
     public void setFacilityList(ArrayList<Facility> facilityList) {
         this.facilityList = facilityList;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Classroom classroom_ = (Classroom) o;
+        return this.capacity - classroom_.getCapacity();
     }
 }

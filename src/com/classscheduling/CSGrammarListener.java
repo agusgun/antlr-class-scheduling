@@ -35,6 +35,9 @@ public class CSGrammarListener extends CSGrammarBaseListener {
     Constraint constraint;
     ArrayList<String> currentConstraint;
 
+    // Schedule stuff
+    boolean isScheduleFound = false;
+
     @Override
     public void enterMain(CSGrammarParser.MainContext ctx) {
         classroomList = new ArrayList<>();
@@ -228,6 +231,12 @@ public class CSGrammarListener extends CSGrammarBaseListener {
         constraint.addSeparatedLectures(currentConstraint);
     }
 
+    // Schedule
+    @Override
+    public void exitSchedule(CSGrammarParser.ScheduleContext ctx) {
+        isScheduleFound = true;
+    }
+
     @Override
     public void exitMain(CSGrammarParser.MainContext ctx) {
         ScheduleController sc = new ScheduleController();
@@ -236,9 +245,14 @@ public class CSGrammarListener extends CSGrammarBaseListener {
         sc.setLecturerList(lecturerList);
         sc.setPreference(preference);
         sc.setConstraint(constraint);
-//        sc.printAll();
+
         sc.init();
         sc.applyPreference();
         sc.applyNormal();
+        if (isScheduleFound) {
+            sc.printSchedule();
+        } else {
+            System.out.println("Did you know? You can use command \"SCHEDULE\" to print schedule.");
+        }
     }
 }

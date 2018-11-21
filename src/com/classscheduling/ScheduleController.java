@@ -10,7 +10,6 @@ public class ScheduleController {
     private ArrayList<Lecturer> lecturerList;
     private Preference preference;
     private Constraint constraint;
-    private Schedule schedule;
     private ArrayList<ScheduleCell> scheduleCellList;
     private int row = 11;
     private int col = 5;
@@ -21,7 +20,6 @@ public class ScheduleController {
         this.lecturerList = new ArrayList<>();
         this.preference = new Preference();
         this.constraint = new Constraint();
-        this.schedule = new Schedule();
         this.scheduleCellList = new ArrayList<>();
     }
 
@@ -133,13 +131,13 @@ public class ScheduleController {
         // Init Classroom
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
-                ScheduleCell scheduleCell = new ScheduleCell();
+                ScheduleCell scheduleCell = new ScheduleCell(j, i);
                 scheduleCell.setListOfAvailableClassrooms(classroomList);
                 scheduleCellList.add(scheduleCell);
             }
         }
 
-//        // Test Copy Classroom
+//        // Main Copy Classroom
 ////        scheduleCellList.get(1).getListOfAvailableClassrooms().remove(2);
 //        for (int i = 0; i < 2; i++) {
 //            ArrayList<Classroom> tempClassroom;
@@ -162,7 +160,7 @@ public class ScheduleController {
             }
         }
 
-        // Test Copy Lecturer
+        // Main Copy Lecturer
 //        for (int i = 0; i < row; i++) {
 //            for (int j = 0; j < col; j++) {
 //                ArrayList<Lecturer> tempLecturer;
@@ -180,7 +178,10 @@ public class ScheduleController {
         for (int i = 0; i < preference.getCooccurLecturesList().size(); i++) {
             ArrayList<Lecture> listOfPreferenceLecture = new ArrayList<>();
             for (int j = 0; j < preference.getCooccurLectures(i).size(); j++) {
-                listOfPreferenceLecture.add(findLectureWithName(preference.getCooccurLectures(i).get(j)));
+                Lecture currentLecture = findLectureWithName(preference.getCooccurLectures(i).get(j));
+                if(currentLecture != null) {
+                    listOfPreferenceLecture.add(currentLecture);
+                }
             }
 
             for (int j = 0; j < row; j++) {
@@ -188,12 +189,40 @@ public class ScheduleController {
                     boolean assigned = scheduleCellList.get(j * 5 + k).assignLectureWithPreference(listOfPreferenceLecture);
                     if (assigned) {
                         for (int l = 0; l < listOfPreferenceLecture.size(); l++) {
-                            System.out.println("Assigned" + listOfPreferenceLecture.get(l).getLectureName() + " " + tempLecturer.getTimeFromInt(j) + " " + tempLecturer.getDayFromInt(k));
+//                            System.out.println("Assigned" + listOfPreferenceLecture.get(l).getLectureName() + " " + tempLecturer.getTimeFromInt(j) + " " + tempLecturer.getDayFromInt(k));
                             lectureList.remove(listOfPreferenceLecture.get(l));
+//                            int index = findIndexOfLecture(listOfPreferenceLecture.get(l));
+//                            System.out.println(index);
+//                            if(index != -1) {
+//                                System.out.println(this.lectureList.get(index).getLectureName());
+//                                this.lectureList.remove(index);
+//                            }
                         }
+                        // if assigned delete list of preference Lecture
+                        listOfPreferenceLecture = new ArrayList<>();
                     }
                 }
             }
+        }
+    }
+
+    // Find index of a lecture
+    private int findIndexOfLecture(Lecture lecture) {
+        boolean found = false;
+        int i = 0;
+
+        while(!found && i < this.lectureList.size()) {
+            if(this.lectureList.get(i).equals(lecture)) {
+                found = true;
+            } else {
+                i++;
+            }
+        }
+
+        if(found) {
+            return i;
+        } else {
+            return -1;
         }
     }
 
@@ -211,7 +240,7 @@ public class ScheduleController {
                         // If Allowed
                         boolean assigned = scheduleCellList.get(i * 5 + j).assignLecture(tempLecture);
                         if (assigned) {
-                            System.out.println("Assigned " + lectureList.get(k).getLectureName() + " " + tempLecturer.getTimeFromInt(i) + " " + tempLecturer.getDayFromInt(j));
+//                            System.out.println("Assigned " + lectureList.get(k).getLectureName() + " " + tempLecturer.getTimeFromInt(i) + " " + tempLecturer.getDayFromInt(j));
                             lectureList.remove(tempLecture);
                         }
                     }
@@ -224,18 +253,29 @@ public class ScheduleController {
         boolean found = false;
         int i = 0;
 
-        while(!found && i < this.lectureList.size()) {
-            if(this.lectureList.get(i).getLectureName().equals(lectureName)) {
+        while (!found && i < this.lectureList.size()) {
+            if (this.lectureList.get(i).getLectureName().equals(lectureName)) {
                 found = true;
             } else {
                 i++;
             }
         }
 
-        if(found) {
+        if (found) {
             return this.lectureList.get(i);
         } else {
             return null;
         }
+    }
+
+    public void printSchedule() {
+        String schedule = "SCHEDULE\n";
+        for (int i = 0; i < this.scheduleCellList.size(); i++) {
+            if(this.scheduleCellList.get(i).getListOfScheduledLectures().size() > 0) {
+                schedule += this.scheduleCellList.get(i).toString() + "\n";
+            }
+        }
+
+        System.out.print(schedule);
     }
 }

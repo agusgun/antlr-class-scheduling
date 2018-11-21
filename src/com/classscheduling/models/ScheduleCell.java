@@ -1,16 +1,19 @@
 package com.classscheduling.models;
 
-import jdk.internal.org.objectweb.asm.ClassReader;
-
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ScheduleCell {
     private ArrayList<Classroom> listOfAvailableClassrooms;
     private ArrayList<Lecturer> listOfAvailableLecturers;
     private ArrayList<ScheduledLecture> listOfScheduledLectures;
+    private int day;
+    private int time;
 
 
-    public ScheduleCell() {
+    public ScheduleCell(int day, int time) {
+        this.day = day;
+        this.time = time;
         this.listOfAvailableClassrooms = new ArrayList<>();
         this.listOfAvailableLecturers = new ArrayList<>();
         this.listOfScheduledLectures = new ArrayList<>();
@@ -24,6 +27,10 @@ public class ScheduleCell {
         this.listOfAvailableLecturers = new ArrayList<>(listOfAvailableLecturers);
     }
 
+    public ArrayList<ScheduledLecture> getListOfScheduledLectures() {
+        return this.listOfScheduledLectures;
+    }
+
     public ArrayList<Classroom> getListOfAvailableClassrooms() {
         return listOfAvailableClassrooms;
     }
@@ -33,22 +40,24 @@ public class ScheduleCell {
     }
 
     // return true if success to assign lecture
-    public boolean assignLectureWithPreference(ArrayList<Lecture> listOfLecture) {
+    public boolean assignLectureWithPreference(ArrayList<Lecture> preferredListOfLecture) {
         ArrayList<Classroom> tempListOfAvailableClassrooms = new ArrayList<>(this.listOfAvailableClassrooms);
         ArrayList<Lecturer> tempListOfAvailableLecturers = new ArrayList<>(this.listOfAvailableLecturers);
 
         ArrayList<Classroom> matchedListOfClassrooms = new ArrayList<>();
         ArrayList<Lecturer> matchedListOfLecturers = new ArrayList<>();
 
+        Collections.sort(tempListOfAvailableClassrooms);
+
         // Check all prefered lecture are assigned
-        for (int i = 0; i < listOfLecture.size(); i++) {
-            Classroom matchClassroom = findMatchClassroom(listOfLecture.get(i), tempListOfAvailableClassrooms);
+        for (int i = 0; i < preferredListOfLecture.size(); i++) {
+            Classroom matchClassroom = findMatchClassroom(preferredListOfLecture.get(i), tempListOfAvailableClassrooms);
 
             if (matchClassroom == null) {
                 return false;
             }
 
-            Lecturer matchLecturer = findMatchLecturer(listOfLecture.get(i), tempListOfAvailableLecturers);
+            Lecturer matchLecturer = findMatchLecturer(preferredListOfLecture.get(i), tempListOfAvailableLecturers);
 
             if (matchLecturer == null) {
                 return false;
@@ -62,7 +71,7 @@ public class ScheduleCell {
 
         // If correct assignment
         for (int i = 0; i < matchedListOfClassrooms.size(); i++) {
-            listOfScheduledLectures.add(new ScheduledLecture(matchedListOfClassrooms.get(i), listOfLecture.get(i), matchedListOfLecturers.get(i)));
+            listOfScheduledLectures.add(new ScheduledLecture(matchedListOfClassrooms.get(i), preferredListOfLecture.get(i), matchedListOfLecturers.get(i)));
         }
 
         return true;
@@ -70,6 +79,7 @@ public class ScheduleCell {
 
     // return true if success to assign lecture
     public boolean assignLecture(Lecture lecture) {
+        Collections.sort(this.listOfAvailableClassrooms);
         Classroom matchClassroom = findMatchClassroom(lecture);
 
         if (matchClassroom == null) {
@@ -153,7 +163,7 @@ public class ScheduleCell {
 
         int i = 0;
         while (!found && i < this.listOfAvailableClassrooms.size()) {
-            if (lecture.getCapacity() == this.listOfAvailableClassrooms.get(i).getCapacity() && areFacilitiesEnough(lecture, this.listOfAvailableClassrooms.get(i))) {
+            if (lecture.getCapacity() <= this.listOfAvailableClassrooms.get(i).getCapacity() && areFacilitiesEnough(lecture, this.listOfAvailableClassrooms.get(i))) {
                 found = true;
             } else {
                 i++;
@@ -172,7 +182,7 @@ public class ScheduleCell {
 
         int i = 0;
         while (!found && i < listOfClassrooms.size()) {
-            if (lecture.getCapacity() == listOfClassrooms.get(i).getCapacity() && areFacilitiesEnough(lecture, listOfClassrooms.get(i))) {
+            if (lecture.getCapacity() <= listOfClassrooms.get(i).getCapacity() && areFacilitiesEnough(lecture, listOfClassrooms.get(i))) {
                 found = true;
             } else {
                 i++;
@@ -212,10 +222,69 @@ public class ScheduleCell {
         return enough;
     }
 
+    public String toString() {
+        String text = getDayFromInt(this.day) + " (" + getTimeFromInt(this.time) + "-" + getTimeFromInt(this.time + 1) + ")" + "\n";
+
+        if(listOfScheduledLectures.size() > 0) {
+            for (int i = 0; i < listOfScheduledLectures.size(); i++) {
+                text += (i + 1) + ". " + listOfScheduledLectures.get(i).toString() + "\n";
+            }
+        } else {
+            text += "No lecture assigned." + "\n";
+        }
+
+        return text;
+    }
+
+    public String getDayFromInt(int day) {
+        switch (day) {
+            case 0:
+                return "MONDAY";
+            case 1:
+                return "TUESDAY";
+            case 2:
+                return "WEDNESDAY";
+            case 3:
+                return "THURSDAY";
+            case 4:
+                return "FRIDAY";
+        }
+        return "NOT FOUND";
+    }
+
+    public String getTimeFromInt(int time) {
+        switch (time) {
+            case 0:
+                return "07:00";
+            case 1:
+                return "08:00";
+            case 2:
+                return "09:00";
+            case 3:
+                return "10:00";
+            case 4:
+                return "11:00";
+            case 5:
+                return "12:00";
+            case 6:
+                return "13:00";
+            case 7:
+                return "14:00";
+            case 8:
+                return "15:00";
+            case 9:
+                return "16:00";
+            case 10:
+                return "17:00";
+        }
+        return "18.00";
+    }
+
     private class ScheduledLecture {
         private Classroom classroom;
         private Lecture lecture;
         private Lecturer lecturer;
+        private final String separator = " / ";
 
         ScheduledLecture(Classroom classroom, Lecture lecture, Lecturer lecturer) {
             this.classroom = classroom;
@@ -245,6 +314,10 @@ public class ScheduleCell {
 
         public void setLecturer(Lecturer lecturer) {
             this.lecturer = lecturer;
+        }
+
+        public String toString() {
+            return lecture.getLectureName() + separator + lecturer.getLecturerName() + separator + classroom.getClassroomName();
         }
     }
 }

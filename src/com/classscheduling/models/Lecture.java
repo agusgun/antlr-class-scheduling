@@ -16,11 +16,33 @@ public class Lecture {
         this.group = "";
     }
 
-    public Lecture(String lectureName) {
-        this.lectureName = lectureName;
-        this.capacity = defaultCapacity;
-        this.facilityList = new ArrayList<>();
-        this.group = "";
+    public boolean equals(Object other) {
+        if (!(other instanceof Lecture)) {
+            return false;
+        }
+        Lecture otherLecture = (Lecture) other;
+        return this.lectureName.equals(otherLecture.getLectureName()) &&
+                this.capacity == otherLecture.getCapacity() &&
+                areFacilityListsEqual(otherLecture.getFacilityList()) &&
+                this.group.equals(otherLecture.getGroup());
+    }
+
+    private boolean areFacilityListsEqual(ArrayList<Facility> otherFacilityList) {
+        if(this.facilityList.size() != otherFacilityList.size()) {
+            return false;
+        }
+
+        boolean match = true;
+        int i = 0;
+        while(match && i < this.facilityList.size()) {
+            if(this.facilityList.contains(otherFacilityList.get(i))) {
+                i++;
+            } else {
+                match = false;
+            }
+        }
+
+         return match;
     }
 
     public String getLectureName() {

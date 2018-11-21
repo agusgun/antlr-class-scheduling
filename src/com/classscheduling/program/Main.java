@@ -12,10 +12,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
 
-public class Test {
+public class Main {
     public static void main(String []args) throws IOException {
-        String command = "1. CONFIGURE: <CLASS_NAME> WITH <CLASS_CONFIG>\n" +
-                        "CLASS_CONFIG: CAPACITY=<AMOUNT>";
+        String command = "Please input your grammar-based commands (end with EXIT)";
 
         System.out.println(command);
 

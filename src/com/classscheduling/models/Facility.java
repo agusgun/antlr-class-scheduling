@@ -9,6 +9,16 @@ public class Facility {
         this.amount = 0;
     }
 
+//    @Override
+//    public boolean equals(Object other) {
+//        if(!(other instanceof Facility)) {
+//            return false;
+//        }
+//
+//        Facility otherFacility = (Facility) other;
+//        return this.facilityName.equals(otherFacility.getFacilityName()) && this.amount == otherFacility.getAmount();
+//    }
+
     public String getFacilityName() {
         return facilityName;
     }
