@@ -1,5 +1,7 @@
 package com.classscheduling.models;
 
+import jdk.internal.org.objectweb.asm.ClassReader;
+
 import java.util.ArrayList;
 
 public class ScheduleCell {
@@ -22,9 +24,48 @@ public class ScheduleCell {
         this.listOfAvailableLecturers = new ArrayList<>(listOfAvailableLecturers);
     }
 
-    // return true if success to assign lecture
-    public boolean assignLectureWithPreference(ArrayList<String> listOfLectureName) {
+    public ArrayList<Classroom> getListOfAvailableClassrooms() {
+        return listOfAvailableClassrooms;
+    }
 
+    public ArrayList<Lecturer> getListOfAvailableLecturers() {
+        return listOfAvailableLecturers;
+    }
+
+    // return true if success to assign lecture
+    public boolean assignLectureWithPreference(ArrayList<Lecture> listOfLecture) {
+        ArrayList<Classroom> tempListOfAvailableClassrooms = new ArrayList<>(this.listOfAvailableClassrooms);
+        ArrayList<Lecturer> tempListOfAvailableLecturers = new ArrayList<>(this.listOfAvailableLecturers);
+
+        ArrayList<Classroom> matchedListOfClassrooms = new ArrayList<>();
+        ArrayList<Lecturer> matchedListOfLecturers = new ArrayList<>();
+
+        // Check all prefered lecture are assigned
+        for (int i = 0; i < listOfLecture.size(); i++) {
+            Classroom matchClassroom = findMatchClassroom(listOfLecture.get(i), tempListOfAvailableClassrooms);
+
+            if (matchClassroom == null) {
+                return false;
+            }
+
+            Lecturer matchLecturer = findMatchLecturer(listOfLecture.get(i), tempListOfAvailableLecturers);
+
+            if (matchLecturer == null) {
+                return false;
+            }
+            tempListOfAvailableClassrooms.remove(matchClassroom);
+            tempListOfAvailableLecturers.remove(matchLecturer);
+
+            matchedListOfClassrooms.add(matchClassroom);
+            matchedListOfLecturers.add(matchLecturer);
+        }
+
+        // If correct assignment
+        for (int i = 0; i < matchedListOfClassrooms.size(); i++) {
+            listOfScheduledLectures.add(new ScheduledLecture(matchedListOfClassrooms.get(i), listOfLecture.get(i), matchedListOfLecturers.get(i)));
+        }
+
+        return true;
     }
 
     // return true if success to assign lecture
@@ -48,7 +89,7 @@ public class ScheduleCell {
         return true;
     }
 
-    private boolean isAllowed(ArrayList<ArrayList<String>> constraints, Lecture lecture) {
+    public boolean isAllowed(ArrayList<ArrayList<String>> constraints, Lecture lecture) {
         boolean found = false;
         int i = 0;
 
@@ -63,21 +104,10 @@ public class ScheduleCell {
                     j++;
                 }
             }
+            i++;
         }
 
-        return found;
-    }
-
-    private boolean[][] getAvailabilityIntersection(boolean[][] a1, boolean[][] a2) {
-        boolean[][] availability = new boolean[a1.length][a1[0].length];
-
-        for (int i = 0; i < a1.length; i++) {
-            for (int j = 0; j < a1[i].length; j++) {
-                availability[i][j] = a1[i][j] && a2[i][j];
-            }
-        }
-
-        return availability;
+        return !found;
     }
 
     private Lecturer findMatchLecturer(Lecture lecture) {
@@ -99,24 +129,24 @@ public class ScheduleCell {
         }
     }
 
-//    private Lecture findLectureWithName(String lectureName) {
-//        boolean found = false;
-//        int i = 0;
-//
-//        while(!found && i < this.listOfValidLectures.size()) {
-//            if(this.listOfValidLectures.get(i).getLectureName().equals(lectureName)) {
-//                found = true;
-//            } else {
-//                i++;
-//            }
-//        }
-//
-//        if(found) {
-//            return this.listOfValidLectures.get(i);
-//        } else {
-//            return null;
-//        }
-//    }
+    private Lecturer findMatchLecturer(Lecture lecture, ArrayList<Lecturer> listOfLecturer) {
+        boolean found = false;
+        int i = 0;
+
+        while (!found && i < listOfLecturer.size()) {
+            if (listOfLecturer.get(i).getGroup().equals(lecture.getGroup())) {
+                found = true;
+            } else {
+                i++;
+            }
+        }
+
+        if (found) {
+            return listOfLecturer.get(i);
+        } else {
+            return null;
+        }
+    }
 
     private Classroom findMatchClassroom(Lecture lecture) {
         boolean found = false;
@@ -132,6 +162,25 @@ public class ScheduleCell {
 
         if (found) {
             return this.listOfAvailableClassrooms.get(i);
+        } else {
+            return null;
+        }
+    }
+
+    private Classroom findMatchClassroom(Lecture lecture, ArrayList<Classroom> listOfClassrooms) {
+        boolean found = false;
+
+        int i = 0;
+        while (!found && i < listOfClassrooms.size()) {
+            if (lecture.getCapacity() == listOfClassrooms.get(i).getCapacity() && areFacilitiesEnough(lecture, listOfClassrooms.get(i))) {
+                found = true;
+            } else {
+                i++;
+            }
+        }
+
+        if (found) {
+            return listOfClassrooms.get(i);
         } else {
             return null;
         }
@@ -162,40 +211,6 @@ public class ScheduleCell {
 
         return enough;
     }
-
-    //    public void setProperties(Classroom classroom, Lecture lecture, Lecturer lecturer) {
-//        this.classroom = classroom;
-//        this.lecture = lecture;
-//        this.lecturer = lecturer;
-//    }
-//
-//    public Classroom getClassroom() {
-//        return classroom;
-//    }
-//
-//    public void setClassroom(Classroom classroom) {
-//        this.classroom = classroom;
-//    }
-//
-//    public Lecture getLecture() {
-//        return lecture;
-//    }
-//
-//    public void setLecture(Lecture lecture) {
-//        this.lecture = lecture;
-//    }
-//
-//    public Lecturer getLecturer() {
-//        return lecturer;
-//    }
-//
-//    public void setLecturer(Lecturer lecturer) {
-//        this.lecturer = lecturer;
-//    }
-//
-//    public String toString() {
-//        return classroom.getClassroomName() + "\t" + lecture.getLectureName() + "\t" + lecturer.getLecturerName();
-//    }
 
     private class ScheduledLecture {
         private Classroom classroom;

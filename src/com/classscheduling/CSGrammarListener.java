@@ -230,65 +230,15 @@ public class CSGrammarListener extends CSGrammarBaseListener {
 
     @Override
     public void exitMain(CSGrammarParser.MainContext ctx) {
-        System.out.println("List of Classroom:");
-        for (int i = 0; i < classroomList.size(); i++) {
-            Classroom classroom = classroomList.get(i);
-            System.out.println(classroom.getClassroomName() + " " + classroom.getCapacity());
-            System.out.println("Facility List:");
-            ArrayList<Facility> classroomFacilityList = classroom.getFacilityList();
-            if (classroomFacilityList.size() == 0) {
-                System.out.println("No Facility Found");
-            } else {
-                for (int j = 0; j < classroomFacilityList.size(); j++) {
-                    System.out.println(classroomFacilityList.get(j).getFacilityName() + " " + Integer.toString(classroomFacilityList.get(j).getAmount()));
-                }
-            }
-
-        }
-
-        System.out.println("List of Lecture:");
-        for (int i = 0; i < lectureList.size(); i++) {
-            Lecture lecture = lectureList.get(i);
-            System.out.println(lecture.getLectureName() + " " + lecture.getCapacity() + " " + lecture.getGroup());
-            System.out.println("Facility List:");
-            ArrayList<Facility> lectureFacilityList = lecture.getFacilityList();
-            if (lectureFacilityList.size() == 0) {
-                System.out.println("No Facility Found");
-            } else {
-                for (int j = 0; j < lectureFacilityList.size(); j++) {
-                    System.out.println(lectureFacilityList.get(j).getFacilityName() + " " + Integer.toString(lectureFacilityList.get(j).getAmount()));
-                }
-            }
-        }
-
-        System.out.println("List of Lecturer:");
-        for (int i = 0; i < lecturerList.size(); i++) {
-            Lecturer lecturer = lecturerList.get(i);
-            System.out.println(lecturer.getLecturerName() + " " + lecturer.getGroup());
-            for (int timeIterator = 0; timeIterator < 11; timeIterator++) {
-                for (int dayIterator = 0; dayIterator < 5; dayIterator++) {
-                    System.out.print(lecturer.getLecturerAvailabilityAt(timeIterator, dayIterator) + " ");
-                }
-                System.out.println();
-            }
-        }
-
-        System.out.println("List of Preference:");
-        for (int i = 0; i < preference.getCooccurLecturesList().size(); i++) {
-            ArrayList<String> onePreferenceList = preference.getCooccurLectures(i);
-            for (int j = 0; j < onePreferenceList.size(); j++) {
-                System.out.print(onePreferenceList.get(j) + " ");
-            }
-            System.out.println();
-        }
-
-        System.out.println("List of Constraint:");
-        for (int i = 0; i < constraint.getSeparatedLecturesList().size(); i++) {
-            ArrayList<String> oneConstraintList = constraint.getSeparatedLectures(i);
-            for (int j = 0; j < oneConstraintList.size(); j++) {
-                System.out.print(oneConstraintList.get(j) + " ");
-            }
-            System.out.println();
-        }
+        ScheduleController sc = new ScheduleController();
+        sc.setClassroomList(classroomList);
+        sc.setLectureList(lectureList);
+        sc.setLecturerList(lecturerList);
+        sc.setPreference(preference);
+        sc.setConstraint(constraint);
+//        sc.printAll();
+        sc.init();
+        sc.applyPreference();
+        sc.applyNormal();
     }
 }

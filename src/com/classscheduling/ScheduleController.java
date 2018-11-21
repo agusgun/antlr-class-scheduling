@@ -12,6 +12,8 @@ public class ScheduleController {
     private Constraint constraint;
     private Schedule schedule;
     private ArrayList<ScheduleCell> scheduleCellList;
+    private int row = 11;
+    private int col = 5;
 
     public ScheduleController() {
         this.classroomList = new ArrayList<>();
@@ -28,7 +30,7 @@ public class ScheduleController {
     }
 
     public void setClassroomList(ArrayList<Classroom> classroomList) {
-        this.classroomList = classroomList;
+        this.classroomList = new ArrayList<>(classroomList);
     }
 
     public ArrayList<Lecture> getLectureList() {
@@ -36,7 +38,7 @@ public class ScheduleController {
     }
 
     public void setLectureList(ArrayList<Lecture> lectureList) {
-        this.lectureList = lectureList;
+        this.lectureList = new ArrayList<>(lectureList);
     }
 
     public ArrayList<Lecturer> getLecturerList() {
@@ -44,7 +46,7 @@ public class ScheduleController {
     }
 
     public void setLecturerList(ArrayList<Lecturer> lecturerList) {
-        this.lecturerList = lecturerList;
+        this.lecturerList = new ArrayList<>(lecturerList);
     }
 
     public Preference getPreference() {
@@ -63,147 +65,177 @@ public class ScheduleController {
         this.constraint = constraint;
     }
 
-    private void
-
-    private void applyPreference() {
-
-        for (int i = 0; i < preference.getCooccurLecturesList().size(); i++) {
-            ArrayList<String> preferenceListName = new ArrayList<>();
-            for (int j = 0; j < preference.getCooccurLectures(i).size(); j++) {
-                preferenceListName.add(preference.getCooccurLectures(i).get(j));
+    public void printAll() {
+        System.out.println("List of Classroom:");
+        for (int i = 0; i < classroomList.size(); i++) {
+            Classroom classroom = classroomList.get(i);
+            System.out.println(classroom.getClassroomName() + " " + classroom.getCapacity());
+            System.out.println("Facility List:");
+            ArrayList<Facility> classroomFacilityList = classroom.getFacilityList();
+            if (classroomFacilityList.size() == 0) {
+                System.out.println("No Facility Found");
+            } else {
+                for (int j = 0; j < classroomFacilityList.size(); j++) {
+                    System.out.println(classroomFacilityList.get(j).getFacilityName() + " " + Integer.toString(classroomFacilityList.get(j).getAmount()));
+                }
             }
 
+        }
 
+        System.out.println("List of Lecture:");
+        for (int i = 0; i < lectureList.size(); i++) {
+            Lecture lecture = lectureList.get(i);
+            System.out.println(lecture.getLectureName() + " " + lecture.getCapacity() + " " + lecture.getGroup());
+            System.out.println("Facility List:");
+            ArrayList<Facility> lectureFacilityList = lecture.getFacilityList();
+            if (lectureFacilityList.size() == 0) {
+                System.out.println("No Facility Found");
+            } else {
+                for (int j = 0; j < lectureFacilityList.size(); j++) {
+                    System.out.println(lectureFacilityList.get(j).getFacilityName() + " " + Integer.toString(lectureFacilityList.get(j).getAmount()));
+                }
+            }
+        }
 
-//            Lecture currentLecture = findLectureWithName(preference.getCooccurLectures(i).get(0));
-//            this.lectureList.remove(currentLecture);
-//
-//            Classroom matchClassroom = findMatchClassroom(currentLecture);
-//            this.classroomList.remove(matchClassroom);
-//
-//            String newClassroomName = matchClassroom.getClassroomName();
-//
-//            Lecturer currentLecturer = findMatchLecturer(currentLecture);
-//
-//            String newLecturerName = currentLecturer.getLecturerName();
-//            boolean[][] newLecturerAvailability = currentLecturer.getLecturerAvailability();
-//
-//            for (int j = 1; j < preference.getCooccurLectures(i).size(); j++) {
-//                newLectureName += ", " + preference.getCooccurLectures(i).get(j);
-//
-//                currentLecture = findLectureWithName(preference.getCooccurLectures(i).get(j));
-//                this.lectureList.remove(currentLecture);
-//
-//                currentLecturer = findMatchLecturer(currentLecture);
-//                newLecturerName += ", " + currentLecturer.getLecturerName();
-//                newLecturerAvailability = getAvailabilityIntersection(newLecturerAvailability, currentLecturer.getLecturerAvailability());
-//
-//                matchClassroom = findMatchClassroom(currentLecture);
-//                this.classroomList.remove(matchClassroom);
-//
-//                newClassroomName += ", " + matchClassroom.getClassroomName();
-//            }
-//
-//            ScheduleCell sc = new ScheduleCell();
-//            sc.setClassroom(new Classroom(newClassroomName));
-//            sc.setLecture(new Lecture(newLectureName));
-//            sc.setLecturer(new Lecturer(newLecturerName, newLecturerAvailability));
-//            this.scheduleCellList.add(sc);
+        System.out.println("List of Lecturer:");
+        for (int i = 0; i < lecturerList.size(); i++) {
+            Lecturer lecturer = lecturerList.get(i);
+            System.out.println(lecturer.getLecturerName() + " " + lecturer.getGroup());
+            for (int timeIterator = 0; timeIterator < 11; timeIterator++) {
+                for (int dayIterator = 0; dayIterator < 5; dayIterator++) {
+                    System.out.print(lecturer.getLecturerAvailabilityAt(timeIterator, dayIterator) + " ");
+                }
+                System.out.println();
+            }
+        }
+
+        System.out.println("List of Preference:");
+        for (int i = 0; i < preference.getCooccurLecturesList().size(); i++) {
+            ArrayList<String> onePreferenceList = preference.getCooccurLectures(i);
+            for (int j = 0; j < onePreferenceList.size(); j++) {
+                System.out.print(onePreferenceList.get(j) + " ");
+            }
+            System.out.println();
+        }
+
+        System.out.println("List of Constraint:");
+        for (int i = 0; i < constraint.getSeparatedLecturesList().size(); i++) {
+            ArrayList<String> oneConstraintList = constraint.getSeparatedLectures(i);
+            for (int j = 0; j < oneConstraintList.size(); j++) {
+                System.out.print(oneConstraintList.get(j) + " ");
+            }
+            System.out.println();
         }
     }
 
-//    private boolean[][] getAvailabilityIntersection(boolean[][] a1, boolean[][] a2) {
-//        boolean[][] availability = new boolean[a1.length][a1[0].length];
-//
-//        for(int i = 0; i < a1.length; i++) {
-//            for(int j = 0; j < a1[i].length; j++) {
-//                availability[i][j] = a1[i][j] && a2[i][j];
+    // After Set All Classroom, Lecture, Lecturer, Preference, Constraint, Call this from listener
+    public void init() {
+        // Init Classroom
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                ScheduleCell scheduleCell = new ScheduleCell();
+                scheduleCell.setListOfAvailableClassrooms(classroomList);
+                scheduleCellList.add(scheduleCell);
+            }
+        }
+
+//        // Test Copy Classroom
+////        scheduleCellList.get(1).getListOfAvailableClassrooms().remove(2);
+//        for (int i = 0; i < 2; i++) {
+//            ArrayList<Classroom> tempClassroom;
+//            tempClassroom = scheduleCellList.get(i).getListOfAvailableClassrooms();
+//            for (int j = 0; j < tempClassroom.size(); j++) {
+//                System.out.println(Integer.toString(i) + " " + tempClassroom.get(j).getClassroomName());
 //            }
 //        }
-//
-//        return availability;
-//    }
-//
-//    private Lecturer findMatchLecturer(Lecture lecture) {
-//        boolean found = false;
-//        int i = 0;
-//
-//        while(!found && i < this.lecturerList.size()) {
-//            if(this.lecturerList.get(i).getGroup().equals(lecture.getGroup())) {
-//                found = true;
-//            } else {
-//                i++;
-//            }
-//        }
-//
-//        if(found) {
-//            return this.lecturerList.get(i);
-//        } else {
-//            return null;
-//        }
-//    }
-//
-//    private Lecture findLectureWithName(String lectureName) {
-//        boolean found = false;
-//        int i = 0;
-//
-//        while(!found && i < this.lectureList.size()) {
-//            if(this.lectureList.get(i).getLectureName().equals(lectureName)) {
-//                found = true;
-//            } else {
-//                i++;
-//            }
-//        }
-//
-//        if(found) {
-//            return this.lectureList.get(i);
-//        } else {
-//            return null;
-//        }
-//    }
-//
-//    private Classroom findMatchClassroom(Lecture lecture) {
-//        boolean found = false;
-//
-//        int i = 0;
-//        while (!found && i < this.classroomList.size()) {
-//            if (lecture.getCapacity() == this.classroomList.get(i).getCapacity() && areFacilitiesEnough(lecture, this.classroomList.get(i))) {
-//                found = true;
-//            } else {
-//                i++;
-//            }
-//        }
-//
-//        if(found) {
-//            return this.classroomList.get(i);
-//        } else {
-//            return null;
-//        }
-//    }
-//
-//    private boolean areFacilitiesEnough(Lecture lecture, Classroom classroom) {
-//        boolean enough = true;
-//        int i = 0;
-//
-//        while (enough && i < lecture.getFacilityList().size()) {
-//            int j = 0;
-//            boolean match = false;
-//
-//            while (!match && j < classroom.getFacilityList().size()) {
-//                if(lecture.getFacility(i).getFacilityName().equals(classroom.getFacility(j).getFacilityName()) && lecture.getFacility(i).getAmount() == classroom.getFacility(j).getAmount()) {
-//                    match = true;
-//                } else {
-//                    j++;
+
+        //  Init Lecturer
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                ArrayList<Lecturer> tempLecturer = new ArrayList<>();
+                for (int k = 0; k < lecturerList.size(); k++) {
+                    if (lecturerList.get(k).getLecturerAvailabilityAt(i, j)) {
+                        tempLecturer.add(lecturerList.get(k));
+                    }
+                }
+                scheduleCellList.get(i * 5 + j).setListOfAvailableLecturers(tempLecturer);
+            }
+        }
+
+        // Test Copy Lecturer
+//        for (int i = 0; i < row; i++) {
+//            for (int j = 0; j < col; j++) {
+//                ArrayList<Lecturer> tempLecturer;
+//                tempLecturer = scheduleCellList.get(i * 5 + j).getListOfAvailableLecturers();
+//                for (int k = 0; k < tempLecturer.size(); k++) {
+//                    System.out.print(tempLecturer.get(k).getLecturerName() + " ");
 //                }
-//            }
-//
-//            if(!match) {
-//                enough = false;
-//            } else {
-//                i++;
+//                System.out.println(Integer.toString(i) + " " + Integer.toString(j));
 //            }
 //        }
-//
-//        return enough;
-//    }
+    }
+
+    public void applyPreference() {
+        Lecturer tempLecturer = new Lecturer();
+        for (int i = 0; i < preference.getCooccurLecturesList().size(); i++) {
+            ArrayList<Lecture> listOfPreferenceLecture = new ArrayList<>();
+            for (int j = 0; j < preference.getCooccurLectures(i).size(); j++) {
+                listOfPreferenceLecture.add(findLectureWithName(preference.getCooccurLectures(i).get(j)));
+            }
+
+            for (int j = 0; j < row; j++) {
+                for (int k = 0; k < col; k++) {
+                    boolean assigned = scheduleCellList.get(j * 5 + k).assignLectureWithPreference(listOfPreferenceLecture);
+                    if (assigned) {
+                        for (int l = 0; l < listOfPreferenceLecture.size(); l++) {
+                            System.out.println("Assigned" + listOfPreferenceLecture.get(l).getLectureName() + " " + tempLecturer.getTimeFromInt(j) + " " + tempLecturer.getDayFromInt(k));
+                            lectureList.remove(listOfPreferenceLecture.get(l));
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Assign lecture without preference (can with constraint)
+    public void applyNormal() {
+        Lecturer tempLecturer = new Lecturer();
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                for (int k = 0; k < lectureList.size(); k++) {
+                    Lecture tempLecture;
+                    tempLecture = lectureList.get(k);
+                    // Apply Constraint
+                    boolean isAllowed = scheduleCellList.get(i * 5 + j).isAllowed(constraint.getSeparatedLecturesList(), tempLecture);
+                    if (isAllowed) {
+                        // If Allowed
+                        boolean assigned = scheduleCellList.get(i * 5 + j).assignLecture(tempLecture);
+                        if (assigned) {
+                            System.out.println("Assigned " + lectureList.get(k).getLectureName() + " " + tempLecturer.getTimeFromInt(i) + " " + tempLecturer.getDayFromInt(j));
+                            lectureList.remove(tempLecture);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private Lecture findLectureWithName(String lectureName) {
+        boolean found = false;
+        int i = 0;
+
+        while(!found && i < this.lectureList.size()) {
+            if(this.lectureList.get(i).getLectureName().equals(lectureName)) {
+                found = true;
+            } else {
+                i++;
+            }
+        }
+
+        if(found) {
+            return this.lectureList.get(i);
+        } else {
+            return null;
+        }
+    }
 }

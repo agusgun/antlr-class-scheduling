@@ -49,7 +49,6 @@ public class Lecturer {
 
     public void setLecturerAvailableByDayString(String dayString) {
         int day = getDayFromString(dayString);
-        System.out.println(dayString);
         for (int i = 0; i < rows; i++) {
             lecturerAvailability[i][day] = true;
         }
@@ -90,6 +89,22 @@ public class Lecturer {
         return -1;
     }
 
+    public String getDayFromInt(int day) {
+        switch (day) {
+            case 0:
+                return "MONDAY";
+            case 1:
+                return "TUESDAY";
+            case 2:
+                return "WEDNESDAY";
+            case 3:
+                return "THURSDAY";
+            case 4:
+                return "FRIDAY";
+        }
+        return "NOT FOUND";
+    }
+
     public int getTimeFromString(String time) {
         switch (time) {
             case "07:00":
@@ -116,6 +131,34 @@ public class Lecturer {
                 return 10;
         }
         return -1;
+    }
+
+    public String getTimeFromInt(int time) {
+        switch (time) {
+            case 0:
+                return "07:00";
+            case 1:
+                return "08:00";
+            case 2:
+                return "09:00";
+            case 3:
+                return "10:00";
+            case 4:
+                return "11:00";
+            case 5:
+                return "12:00";
+            case 6:
+                return "13:00";
+            case 7:
+                return "14:00";
+            case 8:
+                return "15:00";
+            case 9:
+                return "16:00";
+            case 10:
+                return "17:00";
+        }
+        return "NOT FOUND";
     }
 
     public String getGroup() {
