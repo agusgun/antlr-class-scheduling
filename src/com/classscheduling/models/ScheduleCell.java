@@ -1,5 +1,7 @@
 package com.classscheduling.models;
 
+import com.sun.deploy.util.ArrayUtil;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -38,7 +40,12 @@ public class ScheduleCell {
     public ArrayList<Lecturer> getListOfAvailableLecturers() {
         return listOfAvailableLecturers;
     }
-
+    private void removeElement(ArrayList<Classroom> arr, int removedIdx) {
+        System.arraycopy(arr, removedIdx + 1, arr, removedIdx, arr.size() - 1 - removedIdx);
+    }
+    private void removeLecturer(ArrayList<Lecturer> arr, int removedIdx) {
+        System.arraycopy(arr, removedIdx + 1, arr, removedIdx, arr.size() - 1 - removedIdx);
+    }
     // return true if success to assign lecture
     public boolean assignLectureWithPreference(ArrayList<Lecture> preferredListOfLecture) {
         ArrayList<Classroom> tempListOfAvailableClassrooms = new ArrayList<>(this.listOfAvailableClassrooms);
@@ -71,7 +78,42 @@ public class ScheduleCell {
 
         // If correct assignment
         for (int i = 0; i < matchedListOfClassrooms.size(); i++) {
-            listOfScheduledLectures.add(new ScheduledLecture(matchedListOfClassrooms.get(i), preferredListOfLecture.get(i), matchedListOfLecturers.get(i)));
+            Classroom dumm = matchedListOfClassrooms.get(i);
+            Lecturer lect = matchedListOfLecturers.get(i);
+            listOfScheduledLectures.add(new ScheduledLecture(dumm,
+                    preferredListOfLecture.get(i),
+                    lect));
+
+            listOfAvailableClassrooms.remove(dumm);
+            listOfAvailableLecturers.remove(lect);
+//            boolean found = false;
+//            int x = 0;
+//            while (x < listOfAvailableClassrooms.size() && !found) {
+//                if (listOfAvailableClassrooms.get(i) == dumm) {
+//                    found = true;
+//                } else {
+//                    x++;
+//                }
+//            }
+//
+//            if (found) {
+//                removeElement(listOfAvailableClassrooms, x);
+//            }
+//
+//            found = false;
+//            x = 0;
+//
+//            while (x < listOfAvailableLecturers.size() && !found) {
+//                if (listOfAvailableLecturers.get(i) == lect) {
+//                    found = true;
+//                } else {
+//                    x++;
+//                }
+//            }
+//
+//            if (found) {
+//                removeLecturer(listOfAvailableLecturers, x);
+//            }
         }
 
         return true;
