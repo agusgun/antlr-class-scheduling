@@ -12,6 +12,8 @@
 
 ## Implemented Use Cases
 
+![Use Case Diagram](UseCaseDiagram.png)
+
 1. Define class room configuration
 
 ```CONFIGURE: R7602 WITH CAPACITY=75, FACILITIES=INFOCUS-1, FACILITIES=WHITEBOARD-2```
