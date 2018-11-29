@@ -37,8 +37,7 @@
 
 ## Full example
 
-See directory `test` for more input-output examples.
-
+### Input Example
 ```
 CONFIGURE: R7602 WITH CAPACITY=20
 CONFIGURE: R7603 WITH CAPACITY=30, FACILITIES=INFOCUS-5
@@ -52,3 +51,15 @@ PREFER: COOCCUR LECTURES = IF4061 K2, IF4063 K2
 SCHEDULE
 EXIT
 ```
+### Ouput Example
+```
+SCHEDULE
+MONDAY (07:00-08:00)
+1. IF4061 K2 / FNA / R7602
+2. IF4063 K2 / MLK / R7604
+
+TUESDAY (07:00-08:00)
+1. IF4062 K2 / MLK / R7603
+```
+
+See directory `test` for more input-output examples.
